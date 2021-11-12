@@ -100,6 +100,15 @@ extension UIViewController {
         }
     }
     
+    func getKey() -> Results<MemoList> {
+        let localRealm = try! Realm()
+        
+        //String -> ' ', AND, OR
+        let search = localRealm.objects(MemoList.self)
+        
+        return search
+    }
+    
     func removeDataFromRealm(index: Int) {
         let localRealm = try! Realm()
         

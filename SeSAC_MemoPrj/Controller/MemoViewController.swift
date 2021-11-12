@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MemoViewController: UIViewController {
     
@@ -16,6 +17,10 @@ class MemoViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     
     var memo: MemoList?
+    
+    let localRealm = try! Realm()
+    
+    var memos: Results<MemoList>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,8 @@ class MemoViewController: UIViewController {
         setUpBarButtons()
         
         textView.becomeFirstResponder()
+        
+        memos = localRealm.objects(MemoList.self)
     }
     
     func setUpBarButtons() {
@@ -97,7 +104,16 @@ class MemoViewController: UIViewController {
 
                 let content = text.substring(from: title.count, to: text.count)
                 
-                addDataToRealm(id: getAllMemoCountFromUserMemo() + 1, title: title, date: Date(), fixed: false, content: content)
+                // 수정 필요 100개 한정
+                var arr: [Int] = []
+                for i in 0 ..< memos.count {
+                    arr.append(memos[i].id)
+                }
+                let arr2 = Array<Int>(1...100)
+                
+                let filteredArr = arr2.filter{!arr.contains($0)}
+                
+                addDataToRealm(id: filteredArr.first!, title: title, date: Date(), fixed: false, content: content)
             }
         }
         CompleteActionHandler?()
