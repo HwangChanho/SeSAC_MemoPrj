@@ -65,6 +65,10 @@ class MainViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     //MARK: - setUp
     
     func setUpSearchController() {
@@ -105,8 +109,6 @@ class MainViewController: UIViewController {
         // self.tabelView.sectionFooterHeight = 20
         self.tabelView.sectionIndexColor = .white
     }
-    
-    
 }
 
 //MARK: - TabelView
@@ -361,3 +363,5 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
         self.tabelView.reloadData()
     }
 }
+
+

@@ -40,11 +40,20 @@ extension UIViewController {
     
     func colorText(text: String) -> NSMutableAttributedString{
         let attributedString = NSMutableAttributedString(string: (text), attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .medium), .foregroundColor: UIColor.orange, .kern: -1.0]) // kern은 자간
-         
+        
         attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 10, weight: .bold), range: (text as NSString).range(of: text))
         
         return attributedString
         
         // Label.attributedText = colorText(text: coloringText)
+    }
+    
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
