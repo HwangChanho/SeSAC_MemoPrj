@@ -114,7 +114,7 @@ class MemoViewController: UIViewController {
                 let filteredArr = arr2.filter{!arr.contains($0)}
                 
                 addDataToRealm(id: filteredArr.first!, title: title, date: Date(), fixed: false, content: content)
-            }
+            } 
         }
         CompleteActionHandler?()
         self.navigationController?.popViewController(animated: true)

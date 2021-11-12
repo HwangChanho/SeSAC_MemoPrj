@@ -252,12 +252,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     // 왼쪽 스와이프 동작 정의
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
-        
+        // getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
+        let row = memos[indexPath.row]
         let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
             
             // DB제거
-            self.removeDataFromRealm(index: self.row.id)
+            self.removeDataFromRealm(index: row.id)
             self.tabelView.reloadData()
             completion(true)
         }
@@ -273,8 +273,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     // 오른쪽 스와이프 동작 정의
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
-        
+        // getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
+        let row = memos[indexPath.row]
         if !row.fixed {
             if self.getFixedMemoCountFromUserMemo() >= 5 {
                 self.showToast(message: "고정메모는 5개까지만 등록이 가능합니다.")
@@ -287,7 +287,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, UITabl
         
         let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
             // DB에서 favourite 값 변경
-            self.getFixed(index: self.row.id)
+            self.getFixed(index: row.id)
             self.tabelView.reloadData()
             
             completion(true)

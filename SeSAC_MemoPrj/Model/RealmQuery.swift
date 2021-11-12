@@ -112,16 +112,14 @@ extension UIViewController {
     func removeDataFromRealm(index: Int) {
         let localRealm = try! Realm()
         
-        let data = localRealm.objects(MemoList.self).filter("id == \(index)")
-        
-        print("deleted")
-        print(data)
-        
-        for i in 0 ..< data.count {
+        if let data = localRealm.objects(MemoList.self).filter("id == \(index)").first {
+            print(data)
             try! localRealm.write {
-                localRealm.delete(data[i])
+                localRealm.delete(data)
             }
         }
+        
+        print("deleted")
     }
     
     func removeAllData() {
