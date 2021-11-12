@@ -16,3 +16,6 @@
 - SearchCotroller의 이해도등
 
 **쓸대 없는것에 시간을 뻇기지 말자..!!**
+
+11/12 - 18:54 수정
+![image](https://user-images.githubusercontent.com/57205272/141447796-7dfa3bab-be1e-40e5-8e04-29e657cfa7f5.png)
