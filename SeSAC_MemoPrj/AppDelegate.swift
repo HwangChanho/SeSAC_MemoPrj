@@ -13,7 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        UINavigationBar.appearance().tintColor = .orange
+        UIToolbar.appearance().tintColor = .orange
+        UILabel.appearance().textColor = .white
+        UINavigationBar.appearance().backgroundColor = .darkGray
+        //UITableView.appearance().backgroundColor = .black
+        //UIToolbar.appearance().backgroundColor = .darkGray
+        
         return true
     }
 
