@@ -65,10 +65,6 @@ class MainViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
     //MARK: - setUp
     
     func setUpSearchController() {
@@ -77,7 +73,6 @@ class MainViewController: UIViewController {
         searchController.searchResultsUpdater = self // search result updating protocol usage
         searchController.obscuresBackgroundDuringPresentation = false // 거색시 화면 숨김
         searchController.searchBar.placeholder = "검색"
-        searchController.searchBar.tintColor = .white
         searchController.searchBar.tintColor = .lightGray
         searchController.searchBar.autocorrectionType = .no
         searchController.searchBar.autocapitalizationType = .none
@@ -208,6 +203,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, UITabl
             let row = filteredMemos[indexPath.row]
             
             cell.cntentLabel.attributedText = colorText(text: colorText)
+            cell.fullContentLabel.attributedText = colorText(text: colorText)
             
             cell.cntentLabel.text = row.title
             cell.dateLabel.text = getCorrectDateFormat(inputDate: row.date)
@@ -215,10 +211,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, UITabl
         } else {
             getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
             
+            cell.cntentLabel.attributedText = NSMutableAttributedString(string: (row.title), attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.white, .kern: -1.0])
+            cell.fullContentLabel.attributedText = NSMutableAttributedString(string: (row.title), attributes: [.font: UIFont.systemFont(ofSize: 8, weight: .medium), .foregroundColor: UIColor.white, .kern: -1.0])
+            
             cell.cntentLabel.text = row.title
             cell.dateLabel.text = getCorrectDateFormat(inputDate: row.date)
             cell.fullContentLabel.text = row.content
         }
+    
         return cell
     }
     

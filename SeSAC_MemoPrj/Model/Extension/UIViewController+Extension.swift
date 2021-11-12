@@ -39,9 +39,9 @@ extension UIViewController {
     }
     
     func colorText(text: String) -> NSMutableAttributedString{
-        let attributedString = NSMutableAttributedString(string: (text), attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .medium), .foregroundColor: UIColor.orange, .kern: -1.0]) // kern은 자간
+        let attributedString = NSMutableAttributedString(string: (text), attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium), .foregroundColor: UIColor.orange, .kern: -1.0]) // kern은 자간
         
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 10, weight: .bold), range: (text as NSString).range(of: text))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 20, weight: .bold), range: (text as NSString).range(of: text))
         
         return attributedString
         

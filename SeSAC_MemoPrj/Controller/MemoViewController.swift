@@ -105,7 +105,21 @@ class MemoViewController: UIViewController {
     }
     
     @objc func shareButtonPressed(_ sender: UIButton) {
-        
+        let textToShare: String = textView.text
+
+        let activityViewController = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
+
+        // 2. 기본으로 제공되는 서비스 중 사용하지 않을 UIActivityType 제거(선택 사항)
+        activityViewController.excludedActivityTypes = [.addToReadingList, .assignToContact]
+
+        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
+            if success {
+                self.showToast(message: "공유 성공")
+           }  else  {
+                self.showToast(message: "공유 실패")
+           }
+        }
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
