@@ -251,9 +251,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     
     // 왼쪽 스와이프 동작 정의
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if self.searchController.isActive {
+            self.row = memos[indexPath.row]
+        } else {
+            getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
+        }
         
-        getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
-        // let row = memos[indexPath.row]
         let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
             
             // DB제거
@@ -272,9 +275,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     
     // 오른쪽 스와이프 동작 정의
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if self.searchController.isActive {
+            self.row = memos[indexPath.row]
+        } else {
+            getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
+        }
         
-        getRow(indexPathRow: indexPath.row, IndexPathSection: indexPath.section)
-        // let row = memos[indexPath.row]
         if !row.fixed {
             if self.getFixedMemoCountFromUserMemo() >= 5 {
                 self.showToast(message: "고정메모는 5개까지만 등록이 가능합니다.")
